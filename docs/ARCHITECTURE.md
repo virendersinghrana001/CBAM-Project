@@ -1,8 +1,34 @@
 # EcoBorder — Technical Architecture (for slides)
 
 Diagrams (drop straight into PPT):
-- `architecture-overview.png` — layered architecture + tech stack (16:9)
+- **`architecture-runtime.png`** — runtime / deployment architecture: how a user request is served, tier by tier (16:9) ← *the main technical architecture*
+- `architecture-overview.png` — logical/code architecture: layers + tech stack (16:9)
 - `architecture-dataflow.png` — data & calculation flow (16:9)
+
+---
+
+## Slide 0 — Runtime / Deployment Architecture (request flow)
+
+**How a user request is served, tier by tier. There is no application server or database in the request path** — the app is statically generated and served from the edge, and all logic runs in the browser.
+
+**Request path:**
+
+1. **Tier 1 — Client:** the user opens `https://ecoborder.app` in any modern browser (desktop or mobile).
+2. **① HTTPS GET (TLS 1.3) →**
+3. **Tier 2 — Network & Edge (the "backend" in the path):** DNS resolves to the nearest **Vercel Edge** point-of-presence; TLS terminates; the **CDN** returns pre-built static assets (cache HIT). No origin server is invoked.
+4. **② HTML · JS · CSS (cached assets) →**
+5. **Tier 3 — Application runtime (in the browser):** assets load and **Next.js / React hydrate**. The five tool components, the **pure-TypeScript calculation engine**, and the **bundled official CBAM data** all execute here. State is kept in `localStorage`. **No further server round-trips.**
+6. **③ generate in-browser →**
+7. **Tier 4 — Outputs:** Excel (official CBAM template), CSV, JSON and Print are produced client-side and **downloaded to the user's device** — nothing is uploaded.
+
+**Build & deploy (out of the request path):** Developer `git push` → **GitHub** → **Vercel CI/CD** runs `next build` → **SSG static export** → artifacts deployed to the **global Edge/CDN**.
+
+**Why it's served this way:**
+- Repeat navigations are instant **CDN cache hits** at the nearest edge — low latency worldwide.
+- No servers to run, scale or secure in the live path → near-zero cost, effectively infinite scale.
+- Sensitive emissions data **never leaves the browser** (privacy by design).
+
+**Future / optional (dashed in the diagram, not in the current path):** API routes · Database (e.g. Supabase) · Authentication — would be added only if saved projects/accounts are required.
 
 ---
 

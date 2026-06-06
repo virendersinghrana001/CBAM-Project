@@ -1,0 +1,127 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+  *{margin:0;box-sizing:border-box;font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;}
+  body{width:1600px;height:900px;overflow:hidden;
+    background:radial-gradient(50% 60% at 88% -10%,rgba(34,211,238,.16),transparent 60%),
+      radial-gradient(45% 55% at 0% 110%,rgba(132,204,22,.12),transparent 60%),
+      linear-gradient(180deg,#0a1020,#0c1426);color:#e2e8f0;padding:40px 50px;}
+  .head{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;}
+  .brand{display:flex;align-items:center;gap:13px;}
+  .logo{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,#0e7490,#22d3ee);display:grid;place-items:center;font-size:23px;}
+  h1{font-size:27px;font-weight:800;color:#fff;letter-spacing:-.3px;}
+  .sub{font-size:14px;color:#7dd3fc;margin-top:2px;}
+  .pill{font-size:12.5px;font-weight:700;color:#bef264;background:rgba(132,204,22,.12);border:1px solid rgba(132,204,22,.3);padding:7px 13px;border-radius:999px;}
+
+  .flow{display:flex;align-items:stretch;gap:0;margin-top:20px;height:454px;}
+  .tier{flex:1;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.11);border-radius:18px;padding:16px 16px 14px;display:flex;flex-direction:column;backdrop-filter:blur(8px);}
+  .tier.hot{border-color:rgba(34,211,238,.5);background:rgba(8,145,178,.14);box-shadow:0 16px 44px -18px rgba(34,211,238,.55);}
+  .tier .cap{font-size:11px;font-weight:800;letter-spacing:1.3px;text-transform:uppercase;color:#22d3ee;}
+  .tier .ttl{font-size:18px;font-weight:800;color:#fff;margin:3px 0 4px;}
+  .tier .note{font-size:11.5px;color:#94a3b8;line-height:1.4;margin-bottom:11px;}
+  .comp{font-size:13px;font-weight:600;color:#e6f6fb;background:rgba(8,145,178,.18);border:1px solid rgba(34,211,238,.26);padding:8px 11px;border-radius:9px;margin-bottom:7px;display:flex;align-items:center;gap:7px;}
+  .comp.lime{background:rgba(132,204,22,.13);border-color:rgba(132,204,22,.32);color:#ecfccb;}
+  .comp small{display:block;font-weight:400;color:#9fb6c2;font-size:10.5px;margin-top:1px;}
+  .conn{flex:none;width:92px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;}
+  .num{width:26px;height:26px;border-radius:50%;background:#22d3ee;color:#062a33;font-weight:800;font-size:13px;display:grid;place-items:center;}
+  .alabel{font-size:10.5px;color:#9fd9ec;text-align:center;line-height:1.3;font-weight:600;}
+  .aarrow{font-size:26px;color:#38bdf8;line-height:1;}
+  .rev{font-size:10px;color:#64748b;text-align:center;}
+
+  .build{margin-top:18px;display:flex;align-items:center;gap:0;background:rgba(255,255,255,.04);border:1px dashed rgba(148,163,184,.4);border-radius:16px;padding:14px 18px;height:120px;}
+  .blabel{flex:none;width:150px;font-size:11px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:#a3b4c2;}
+  .bstep{flex:1;background:rgba(148,163,184,.12);border:1px solid rgba(148,163,184,.26);border-radius:10px;padding:10px 12px;font-size:13px;font-weight:700;color:#e2e8f0;text-align:center;}
+  .bstep small{display:block;font-weight:400;color:#94a3b8;font-size:10.5px;margin-top:2px;}
+  .bar{flex:none;width:40px;text-align:center;color:#64748b;font-size:20px;}
+
+  .foot{margin-top:14px;display:flex;justify-content:space-between;align-items:center;}
+  .legend{font-size:11.5px;color:#94a3b8;}
+  .legend b{color:#7dd3fc;}
+  .future{font-size:11.5px;color:#64748b;border:1px dashed rgba(100,116,139,.5);padding:6px 12px;border-radius:8px;}
+</style></head><body>
+  <div class="head">
+    <div class="brand"><div class="logo">🌿</div>
+      <div><h1>EcoBorder — Runtime &amp; Deployment Architecture</h1>
+      <div class="sub">How a user request is served, tier by tier</div></div></div>
+    <div class="pill">No application server &amp; no database in the request path</div>
+  </div>
+
+  <div class="flow">
+    <!-- Tier 1: Client -->
+    <div class="tier">
+      <div class="cap">Tier 1 · Client</div>
+      <div class="ttl">User &amp; Device</div>
+      <div class="note">User opens the app in any modern browser.</div>
+      <div class="comp">👤 End user (exporter / importer / analyst)</div>
+      <div class="comp">💻 Desktop &amp; 📱 mobile device</div>
+      <div class="comp">🌐 Web browser<small>Chrome · Safari · Edge · Firefox</small></div>
+      <div class="comp lime">URL: https://ecoborder.app</div>
+    </div>
+
+    <div class="conn">
+      <div class="num">1</div>
+      <div class="aarrow">→</div>
+      <div class="alabel">HTTPS GET<br>(TLS 1.3)</div>
+    </div>
+
+    <!-- Tier 2: Edge / Delivery -->
+    <div class="tier">
+      <div class="cap">Tier 2 · Network &amp; Edge (Backend in path)</div>
+      <div class="ttl">Vercel Edge / CDN</div>
+      <div class="note">DNS resolves to the nearest edge PoP; TLS terminates; cached static assets are returned.</div>
+      <div class="comp">🧭 DNS resolution</div>
+      <div class="comp">🛡️ TLS termination + HTTP/2</div>
+      <div class="comp">🌍 Vercel Edge Network<small>global points-of-presence</small></div>
+      <div class="comp lime">⚡ CDN cache — serves pre-built static files (cache HIT)</div>
+    </div>
+
+    <div class="conn">
+      <div class="num">2</div>
+      <div class="aarrow">→</div>
+      <div class="alabel">HTML · JS · CSS<br>(cached assets)</div>
+    </div>
+
+    <!-- Tier 3: Browser runtime -->
+    <div class="tier hot">
+      <div class="cap">Tier 3 · Application runtime (in the browser)</div>
+      <div class="ttl">Client-side App</div>
+      <div class="note">Assets load and React hydrates. ALL logic runs here — no further server calls.</div>
+      <div class="comp">⚛️ Next.js / React hydration</div>
+      <div class="comp">🧰 5 tool components (Emissions, Tax, CN, Readiness, Communication)</div>
+      <div class="comp">🧮 Calculation engine (pure TypeScript)</div>
+      <div class="comp lime">📚 Bundled official CBAM data + 🗃️ localStorage state</div>
+    </div>
+
+    <div class="conn">
+      <div class="num">3</div>
+      <div class="aarrow">→</div>
+      <div class="alabel">generate<br>in-browser</div>
+    </div>
+
+    <!-- Tier 4: Outputs -->
+    <div class="tier">
+      <div class="cap">Tier 4 · Outputs</div>
+      <div class="ttl">Files to device</div>
+      <div class="note">Exports are built client-side and saved locally — nothing is uploaded.</div>
+      <div class="comp">📄 Excel (official CBAM template)</div>
+      <div class="comp">📊 CSV · 🧾 JSON</div>
+      <div class="comp">🖨️ Print / PDF</div>
+      <div class="comp lime">⬇️ Downloaded to the user's device</div>
+    </div>
+  </div>
+
+  <!-- Build / CI-CD lane -->
+  <div class="build">
+    <div class="blabel">Build &amp; Deploy<br>(out of request path)</div>
+    <div class="bstep">👩‍💻 Developer<small>git push</small></div>
+    <div class="bar">→</div>
+    <div class="bstep">🐙 GitHub<small>source repo</small></div>
+    <div class="bar">→</div>
+    <div class="bstep">🔧 Vercel CI/CD<small>next build → SSG (static export)</small></div>
+    <div class="bar">→</div>
+    <div class="bstep">🚀 Deploy artifacts<small>to global Edge / CDN</small></div>
+  </div>
+
+  <div class="foot">
+    <div class="legend"><b>Request path:</b> ① User → Edge CDN (HTTPS) &nbsp;②&nbsp; Edge → Browser (static assets) &nbsp;③&nbsp; Browser computes &amp; exports. &nbsp; Repeat navigations are instant CDN cache hits.</div>
+    <div class="future">Future / optional (dashed): API routes · Database (Supabase) · Auth — NOT in the current path</div>
+  </div>
+</body></html>
