@@ -1,0 +1,73 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+  * { margin:0; box-sizing:border-box; font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;}
+  body { width:1600px; height:900px; overflow:hidden;
+    background:radial-gradient(50% 60% at 90% -10%,rgba(34,211,238,.18),transparent 60%),linear-gradient(180deg,#0a1020,#0c1426);
+    color:#e2e8f0; padding:48px 60px;}
+  .head{display:flex;align-items:center;gap:14px;margin-bottom:8px;}
+  .logo{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,#0e7490,#22d3ee);display:grid;place-items:center;font-size:23px;}
+  h1{font-size:30px;font-weight:800;color:#fff;}
+  .sub{font-size:15px;color:#7dd3fc;margin:4px 0 30px 58px;}
+  .pipe{display:flex;align-items:stretch;gap:0;margin-top:6px;}
+  .node{flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:20px 18px;display:flex;flex-direction:column;backdrop-filter:blur(8px);}
+  .node.key{border-color:rgba(34,211,238,.5);background:rgba(8,145,178,.16);box-shadow:0 14px 40px -16px rgba(34,211,238,.5);}
+  .node .ic{font-size:26px;margin-bottom:8px;}
+  .node h2{font-size:18px;font-weight:800;color:#fff;}
+  .node .io{margin-top:10px;font-size:12.5px;color:#cbd5e1;line-height:1.5;}
+  .node .io b{color:#7dd3fc;}
+  .conn{flex:none;width:64px;display:grid;place-items:center;color:#22d3ee;font-size:30px;font-weight:800;}
+  .lane{margin-top:30px;display:flex;gap:18px;}
+  .half{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:18px 20px;}
+  .half h3{font-size:13px;letter-spacing:1.2px;text-transform:uppercase;color:#7dd3fc;margin-bottom:10px;}
+  .flowline{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:14px;color:#e2e8f0;}
+  .box{font-weight:700;background:rgba(8,145,178,.2);border:1px solid rgba(34,211,238,.3);padding:8px 13px;border-radius:10px;}
+  .box.lime{background:rgba(132,204,22,.14);border-color:rgba(132,204,22,.34);color:#ecfccb;}
+  .a{color:#38bdf8;font-weight:800;}
+  .note{margin-top:26px;font-size:14px;color:#94a3b8;text-align:center;}
+  .note b{color:#bef264;}
+  .support{margin-top:22px;display:flex;gap:14px;}
+  .sc{flex:1;background:rgba(148,163,184,.10);border:1px solid rgba(148,163,184,.22);border-radius:14px;padding:14px 18px;font-size:13.5px;color:#cbd5e1;}
+  .sc b{color:#fff;font-size:14.5px;}
+</style></head><body>
+  <div class="head"><div class="logo">🌿</div><h1>EcoBorder — Data &amp; Calculation Flow</h1></div>
+  <div class="sub">activity data → embedded emissions → intensity → CBAM tax → official communication (all in-browser)</div>
+
+  <div class="pipe">
+    <div class="node key">
+      <div class="ic">🌫️</div><h2>Emissions Calculator</h2>
+      <div class="io"><b>In:</b> CN code, production, fuels, precursors, process, heat/waste-gas, electricity<br><b>Out:</b> SEE direct &amp; indirect, intensity (tCO₂e/t)</div>
+    </div>
+    <div class="conn">→</div>
+    <div class="node key">
+      <div class="ic">🧮</div><h2>Tax Calculator</h2>
+      <div class="io"><b>In:</b> intensity, volume, reporting year, origin price<br><b>Out:</b> chargeable, relief, <b>net liability (€)</b></div>
+    </div>
+    <div class="conn">→</div>
+    <div class="node key">
+      <div class="ic">📄</div><h2>Communication Builder</h2>
+      <div class="io"><b>In:</b> installation, processes, precursors, products<br><b>Out:</b> SEE per product → <b>Official Excel template</b></div>
+    </div>
+  </div>
+
+  <div class="lane">
+    <div class="half">
+      <h3>Hand-offs (client-side state)</h3>
+      <div class="flowline"><span class="box">Emissions</span><span class="a">— eb_prefill →</span><span class="box">Tax Calculator</span></div>
+      <div class="flowline" style="margin-top:10px;"><span class="box">Emissions</span><span class="a">— eb_process →</span><span class="box">Communication Builder</span></div>
+      <div style="margin-top:10px;font-size:12.5px;color:#94a3b8;">Passed via browser localStorage — nothing sent to a server.</div>
+    </div>
+    <div class="half">
+      <h3>Calculation engine (per tool)</h3>
+      <div class="flowline"><span class="box lime">SEE = attributed emissions ÷ production</span></div>
+      <div class="flowline" style="margin-top:10px;"><span class="box lime">net = embedded × ETS × factor(year) − origin credit</span></div>
+      <div class="flowline" style="margin-top:10px;"><span class="box lime">precursors cascade · direct/indirect split · 2 dp</span></div>
+    </div>
+  </div>
+
+  <div class="support">
+    <div class="sc"><b>🔎 CN Code Checker</b><br>749 official CN codes → category, default direct/indirect factors, cost. Feeds product selection across tools.</div>
+    <div class="sc"><b>📋 Readiness Check</b><br>5-question score + action list — standalone supporting tool.</div>
+    <div class="sc"><b>⬇️ Exports</b><br>Excel (official template), CSV, JSON, Print — all generated in the browser.</div>
+  </div>
+
+  <div class="note">Official EU data sources bundled at build time: <b>default values (Dec 2023)</b>, <b>749-code CN catalogue</b>, <b>production routes &amp; precursor relationships</b>.</div>
+</body></html>

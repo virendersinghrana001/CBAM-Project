@@ -1,0 +1,104 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+  * { margin:0; box-sizing:border-box; font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; }
+  body { width:1600px; height:900px; overflow:hidden;
+    background:
+      radial-gradient(50% 60% at 85% -10%, rgba(34,211,238,.20), transparent 60%),
+      radial-gradient(45% 55% at 0% 110%, rgba(132,204,22,.14), transparent 60%),
+      linear-gradient(180deg,#0a1020,#0c1426);
+    color:#e2e8f0; padding:46px 56px; }
+  .head { display:flex; align-items:center; justify-content:space-between; margin-bottom:26px; }
+  .brand { display:flex; align-items:center; gap:14px; }
+  .logo { width:46px;height:46px;border-radius:13px;background:linear-gradient(135deg,#0e7490,#22d3ee);display:grid;place-items:center;font-size:24px; box-shadow:0 8px 24px -8px rgba(34,211,238,.6);}
+  h1 { font-size:30px; font-weight:800; color:#fff; letter-spacing:-.4px;}
+  .sub { font-size:15px; color:#7dd3fc; margin-top:2px;}
+  .pill { font-size:13px; font-weight:700; color:#bef264; background:rgba(132,204,22,.12); border:1px solid rgba(132,204,22,.3); padding:7px 14px; border-radius:999px;}
+  .layers { display:flex; flex-direction:column; gap:14px; }
+  .layer { display:flex; align-items:stretch; gap:18px; background:rgba(255,255,255,.045); border:1px solid rgba(255,255,255,.10); border-radius:16px; padding:14px 18px; backdrop-filter:blur(8px); }
+  .lbl { width:230px; flex:none; display:flex; flex-direction:column; justify-content:center; }
+  .lbl .n { font-size:12px; font-weight:800; letter-spacing:1.5px; color:#22d3ee; text-transform:uppercase;}
+  .lbl .t { font-size:18px; font-weight:800; color:#fff; margin-top:2px;}
+  .lbl .d { font-size:12px; color:#94a3b8; margin-top:3px; line-height:1.35;}
+  .chips { flex:1; display:flex; flex-wrap:wrap; gap:9px; align-items:center; }
+  .chip { font-size:13.5px; font-weight:600; color:#e6f6fb; background:rgba(8,145,178,.18); border:1px solid rgba(34,211,238,.28); padding:8px 13px; border-radius:10px; }
+  .chip.lime { background:rgba(132,204,22,.14); border-color:rgba(132,204,22,.34); color:#ecfccb;}
+  .chip.slate { background:rgba(148,163,184,.12); border-color:rgba(148,163,184,.28); color:#e2e8f0;}
+  .arrow { text-align:center; color:#38bdf8; font-size:16px; margin:-7px 0; opacity:.7;}
+  .foot { margin-top:20px; display:flex; gap:14px; }
+  .fcard { flex:1; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1); border-radius:14px; padding:14px 18px;}
+  .fcard h3 { font-size:12px; letter-spacing:1.2px; text-transform:uppercase; color:#7dd3fc; margin-bottom:9px;}
+  .fcard .row { display:flex; flex-wrap:wrap; gap:8px;}
+  .tag { font-size:13px; font-weight:600; color:#0b1220; background:#e2f5fb; padding:6px 12px; border-radius:8px;}
+  .tag.k { background:#bef264;}
+</style></head><body>
+  <div class="head">
+    <div class="brand">
+      <div class="logo">🌿</div>
+      <div><h1>EcoBorder — Technical Architecture</h1><div class="sub">Client-side · static-generated · privacy-by-design CBAM toolkit</div></div>
+    </div>
+    <div class="pill">No backend · No database · No auth — runs entirely in the browser</div>
+  </div>
+
+  <div class="layers">
+    <div class="layer">
+      <div class="lbl"><div class="n">Layer 1</div><div class="t">Presentation (UI)</div><div class="d">Next.js App Router pages + shared components</div></div>
+      <div class="chips">
+        <span class="chip">Home / Tool pages / About / Legal</span>
+        <span class="chip">Header · Footer · PageHero</span>
+        <span class="chip">Tilt (3D) · blocks · ui</span>
+        <span class="chip lime">Design system: aurora · glass · 3D tokens (globals.css)</span>
+      </div>
+    </div>
+    <div class="arrow">▼</div>
+    <div class="layer">
+      <div class="lbl"><div class="n">Layer 2</div><div class="t">Application / Tools</div><div class="d">5 interactive client components</div></div>
+      <div class="chips">
+        <span class="chip">EmissionsCalculator</span>
+        <span class="chip">CbamCalculator</span>
+        <span class="chip">CnCodeChecker</span>
+        <span class="chip">ReadinessQuiz</span>
+        <span class="chip">CommunicationBuilder</span>
+        <span class="chip slate">CnPicker</span>
+      </div>
+    </div>
+    <div class="arrow">▼</div>
+    <div class="layer">
+      <div class="lbl"><div class="n">Layer 3</div><div class="t">Calculation Engine</div><div class="d">Pure TypeScript domain logic (src/lib)</div></div>
+      <div class="chips">
+        <span class="chip">communication.ts — SEE resolver</span>
+        <span class="chip">cbam.ts — phase-in factor + precursors</span>
+        <span class="chip">cbam-routes.ts — routes + category SEE</span>
+        <span class="chip">emissions.ts — fuel/grid factors</span>
+        <span class="chip">cbam-xlsx.ts — Excel export</span>
+      </div>
+    </div>
+    <div class="arrow">▼</div>
+    <div class="layer">
+      <div class="lbl"><div class="n">Layer 4</div><div class="t">Data (bundled, static)</div><div class="d">Official EU datasets — no runtime DB</div></div>
+      <div class="chips">
+        <span class="chip lime">cbam-defaults.ts — EU default values (22 Dec 2023)</span>
+        <span class="chip lime">cn-catalog.ts — 749 official CN codes</span>
+        <span class="chip lime">routes &amp; precursor relationships (template V2)</span>
+        <span class="chip slate">localStorage hand-offs (eb_prefill, eb_process)</span>
+      </div>
+    </div>
+    <div class="arrow">▼</div>
+    <div class="layer">
+      <div class="lbl"><div class="n">Layer 5</div><div class="t">Build &amp; Delivery</div><div class="d">CI/CD and global hosting</div></div>
+      <div class="chips">
+        <span class="chip">GitHub (source)</span>
+        <span class="chip">Vercel CI → SSG build</span>
+        <span class="chip">Static export → Global CDN / Edge</span>
+        <span class="chip slate">Outputs: XLSX · CSV · JSON · Print</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <div class="fcard"><h3>Tech stack</h3><div class="row">
+      <span class="tag">Next.js 16</span><span class="tag">React 19</span><span class="tag">TypeScript</span><span class="tag">Tailwind v4</span><span class="tag">SheetJS (xlsx)</span><span class="tag">Vercel</span>
+    </div></div>
+    <div class="fcard"><h3>Principles</h3><div class="row">
+      <span class="tag k">Tools-first / ungated</span><span class="tag k">Privacy by design</span><span class="tag k">CBAM = single source of truth</span><span class="tag k">Official data</span>
+    </div></div>
+  </div>
+</body></html>
